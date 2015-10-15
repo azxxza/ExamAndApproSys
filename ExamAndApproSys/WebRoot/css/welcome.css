@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+a:visited{
+	color: blue;
+}
+
+a:hover{
+	color: red;
+	text-decoration: overline;
+}

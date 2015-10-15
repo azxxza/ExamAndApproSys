@@ -1,0 +1,81 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00000000511932f5, pid=9004, tid=10904
+#
+# JRE version: 7.0_10-b18
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.6-b04 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# V  [jvm.dll+0x732f5]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000000dd1f800):  JavaThread "JFinal-Scanner" daemon [_thread_in_vm, id=10904, stack(0x000000000eb70000,0x000000000ec70000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x0000000680000008
+
+Registers:
+RAX=0x000000077ffffff8, RBX=0x0000000000000010, RCX=0x000000000ec6e560, RDX=0xffffffff00000010
+RSP=0x000000000ec6e538, RBP=0x000000000ec6e570, RSI=0x0000000000000020, RDI=0x0000000000000000
+R8 =0x000000007ffffff8, R9 =0x000000007ffffff8, R10=0x0000000000000010, R11=0x000000077ffffff8
+R12=0x000000000d98dcd0, R13=0x0000000000000008, R14=0x00000007800d8bc0, R15=0x000000000d98e088
+RIP=0x00000000511932f5, EFLAGS=0x0000000000010282
+
+Top of Stack: (sp=0x000000000ec6e538)
+0x000000000ec6e538:   0000000051205704 0000000001cfcf20
+0x000000000ec6e548:   00000000511c3339 000000000d98e088
+0x000000000ec6e558:   000000000d98dcb0 000000077ffffff8
+0x000000000ec6e568:   00000000000000aa 000000000d98dcb0
+0x000000000ec6e578:   000000000ec6e620 000000000d98dca0
+0x000000000ec6e588:   000000000d98dcd0 00000007800d8bc0
+0x000000000ec6e598:   00000007800d8c68 000000000e37e5a0
+0x000000000ec6e5a8:   0000000051204f2c 000000000e37e5a0
+0x000000000ec6e5b8:   0000000001000000 000000000ec6e620
+0x000000000ec6e5c8:   0000000708000000 0000000000000002
+0x000000000ec6e5d8:   0000000000000218 0000000000000003
+0x000000000ec6e5e8:   000000000d98dca0 000000000e37e5a0
+0x000000000ec6e5f8:   0000000051205173 00000007800d8bc0
+0x000000000ec6e608:   0000000000000010 00000000000001a0
+0x000000000ec6e618:   0000000000000190 000000000d98c928
+0x000000000ec6e628:   0000004000000010 000000aa000000ae 
+
+Instructions: (pc=0x00000000511932f5)
+0x00000000511932d5:   40 48 83 c4 20 5f e9 f0 ff 03 00 4c 63 01 41 8d
+0x00000000511932e5:   44 90 10 48 63 d0 48 8b 01 48 83 e2 fc 49 2b d0
+0x00000000511932f5:   8b 0c 02 0f b6 c1 89 4c 24 10 0f b6 4c 24 11 c1
+0x0000000051193305:   e0 08 0b c1 0f b6 4c 24 12 c1 e0 08 0b c1 0f b6 
+
+
+Register to memory mapping:
+
+RAX=0x000000077ffffff8 is an oop
+{constMethod} 
+ - klass: {other class}
+ - method:       0x0000000780000098 {method} 'getOpcode' '(I)I' in 'net/sf/cglib/asm/Type'
+ - exceptions:   0x000000077be01d50
+bci_from(000000077FFFFFF8) = 16; print_codes():
+RBX=0x0000000000000010 is an unknown value
+RCX=0x000000000ec6e560 is pointing into the stack for thread: 0x000000000dd1f800
+RDX=0xffffffff00000010 is an unknown value
+RSP=0x000000000ec6e538 is pointing into the stack for thread: 0x000000000dd1f800
+RBP=0x000000000ec6e570 is pointing into the stack for thread: 0x000000000dd1f800
+RSI=0x0000000000000020 is an unknown value
+RDI=0x0000000000000000 is an unknown value
+R8 =0x000000007ffffff8 is an unknown value
+R9 =0x000000007ffffff8 is an unknown value
+R10=0x0000000000000010 is an unknown value
+R11=0x000000077ffffff8 is an oop
+{constMethod} 
+ - klass: {other class}
+ - method:       0x0000000780000098 {method} 'getOpcode' '(I)I' in 'net/sf/cglib/asm/Type'
+ - exceptions:   0x000000077be01d50
+bci_from(000000077FFFFFF8) = 16; print_codes():
+R12=0x000000000d98dcd0 is an unknown value
+R13=0x0000000000000008 is an unknown value
+R14=

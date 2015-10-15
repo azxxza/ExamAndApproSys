@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="教师出国审批流程" instanceNoClass="com.foreign.app.utils.VisitGenerate" name="approval">
+<task assignee="unit.operator" autoExecute="Y" displayName="所在单位审批" layout="255,-57,100,52" name="unit" performType="ANY" taskType="Major">
+<transition displayName="通过" g="" name="transition3" offset="2,-4" to="internalStaff"/>
+</task>
+<task assignee="internalChief.operator" autoExecute="Y" displayName="国际处长审批" layout="78,111,-1,-1" name="internalChief" performType="ANY" taskType="Major">
+<transition displayName="审批通过" g="125,377" name="transition5" offset="0,0" to="fork1"/>
+</task>
+<task assignee="financial.operator" autoExecute="Y" displayName="财务" layout="366,274,-1,-1" name="financial" performType="ANY" taskType="Major">
+<transition displayName="通过" g="546,299" name="transition10" offset="0,0" to="join1"/>
+</task>
+<task assignee="fundsSource.operator" autoExecute="Y" displayName="经费来源部门" layout="373,436,-1,-1" name="fundsSource" performType="ANY" taskType="Major">
+<transition g="547,461" name="transition14" offset="0,0" to="join1"/>
+</task>
+<task autoExecute="Y" displayName="教师申请" form="/newApplyController/newApply" layout="-16,51,100,52" name="newApply" performType="ANY" taskType="Major">
+<transition g="" name="transition2" offset="0,0" to="decision3"/>
+</task>
+<fork displayName="fork1" layout="278,353,-1,-1" name="fork1">
+<transition g="302,299" name="transition6" offset="0,0" to="financial"/>
+<transition g="" name="transition7" offset="0,0" to="discipline"/>
+<transition g="301,462" name="transition13" offset="0,0" to="fundsSource"/>
+</fork>
+<task assignee="internalStaff.operator" autoExecute="N" displayName="国际处工作人员审批" layout="239,49,128,52" name="internalStaff" performType="ANY" taskType="Major">
+<transition g="" name="transition4" offset="0,0" to="decision4"/>
+</task>
+<task assignee="discipline.operator" autoExecute="Y" displayName="纪检部门审批" layout="368,351,-1,-1" name="discipline" performType="ANY" taskType="Major">
+<transition g="" name="transition9" offset="0,0" to="join1"/>
+</task>
+<join displayName="join1" layout="523,354,-1,-1" name="join1" postInterceptors="com.foreign.app.model.TestHandle">
+<transition g="" name="transition16" offset="0,0" to="decision1"/>
+</join>
+<task assignee="internalLeader.operator" autoExecute="Y" displayName="分管外事校领导" layout="652,268,119,52" name="internalLeader" performType="ANY" taskType="Major">
+<transition g="" name="transition18" offset="0,0" to="decision2"/>
+</task>
+<task assignee="businessLeader.operator" autoExecute="Y" displayName="业务分管校领导" layout="656,419,110,52" name="businessLeader" performType="ANY" taskType="Major">
+<transition displayName="通过" g="" name="transition11" offset="0,0" to="internalLeader"/>
+</task>
+<start displayName="start1" layout="9,-34,-1,-1" name="start1">
+<transition g="" name="transition1" offset="0,0" to="newApply"/>
+</start>
+<task assignee="partySecretary.operator" autoExecute="Y" displayName="校党委书记" layout="904,346,-1,-1" name="partySecretary" performType="ANY" taskType="Major">
+<transition displayName="通过" g="" name="transition20" offset="0,0" to="end1"/>
+</task>
+<end displayName="end1" layout="928,197,-1,-1" name="end1"/>
+<decision displayName="decision1" expr="${l_no &gt; 3 ? 'transition17' : 'transition8'}" layout="589,353,-1,-1" name="decision1">
+<transition displayName="副处及以下" g="613,293" name="transition17" offset="0,0" to="internalLeader"/>
+<transition displayName="处长及以上" g="612,445" name="transition8" offset="0,0" to="businessLeader"/>
+</decision>
+<decision displayName="decision2" expr="${l_no &gt; 3 ? 'transition19' : 'transition24'}" layout="793,270,-1,-1" name="decision2">
+<transition displayName="副处及以下" g="817,220" name="transition19" offset="51,-14" to="end1"/>
+<transition displayName="处长以上" g="816,372" name="transition24" offset="43,27" to="partySecretary"/>
+</decision>
+<decision displayName="decision3" expr="${unitPass == 1 ? 'transition26':'transition25'}" layout="97,51,-1,-1" name="decision3">
+<transition displayName="单位未审批" g="120,-31" name="transition25" offset="0,0" to="unit"/>
+<transition displayName="单位审批过" g="" name="transition26" offset="0,0" to="internalStaff"/>
+</decision>
+<decision displayName="decision4" expr="${chiefPass == 1 ? 'transition27':'transition22'}" layout="280,115,-1,-1" name="decision4">
+<transition displayName="处长未审批" g="" name="transition22" offset="0,0" to="internalChief"/>
+<transition displayName="处长已审批" g="" name="transition12" offset="0,0" to="decision5"/>
+</decision>
+<decision displayName="decision5" expr="${toDepartment}" handleClass="com.framework.flow.Handler.ToOrgHandler" layout="279,233,-1,-1" name="decision5">
+<transition displayName="财务修改完成" g="414,257" name="transition15" offset="0,0" to="financial"/>
+<transition displayName="经费修改完成" g="215,257;215,542;418,542" name="transition21" offset="-33,186" to="fundsSource"/>
+</decision>
+</process>
