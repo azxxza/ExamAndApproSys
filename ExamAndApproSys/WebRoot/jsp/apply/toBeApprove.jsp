@@ -222,9 +222,13 @@
 		
 		var orderId = row.orderId;
 		
+		var visitSummary = row.visitSummary;
+		
+		alert(visitSummary);
+		
 		var detailURL = "${ctx}/applyController/editApply?orderId=" + orderId;
 		
-		parent.addTabs("详情",detailURL);
+		parent.addTabs(visitSummary + "详情",detailURL);
 	
 	}
 	

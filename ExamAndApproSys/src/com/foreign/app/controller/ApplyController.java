@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.snaker.engine.access.QueryFilter;
-import org.snaker.engine.entity.Order;
 import org.snaker.engine.entity.Task;
 
 import com.foreign.app.bean.ApprovalState;
@@ -95,6 +94,8 @@ public class ApplyController extends BaseController {
 
 		String orderId = getPara("orderId");
 
+		System.out.println(orderId);
+
 		List<Task> list = applyService.getEngine().query()
 				.getActiveTasks(new QueryFilter().setOrderId(orderId));
 
@@ -106,13 +107,11 @@ public class ApplyController extends BaseController {
 
 			applyService.updateApplyFlow(loginUser, taskId);
 
-			FlowApproval approval = FlowApproval.findByOrderIdAndTaskKey(orderId,
-					FlowCommon.INTERNALSTAFF);
+			FlowApproval approval = FlowApproval.findByOrderIdAndTaskKey(
+					orderId, FlowCommon.INTERNALSTAFF);
 
 			if (approval != null) {
-				approval.set("result", 2);
-
-				approval.update();
+				approval.delete();
 			}
 
 		}
@@ -209,20 +208,28 @@ public class ApplyController extends BaseController {
 
 		String orderId = getPara("orderId");
 
-		if (orderId != null && !orderId.equals("")) {
-			Order order = applyService.getEngine().query().getOrder(orderId);
-			if (order != null) {
-				setAttr("orderId", orderId);
-				List<Task> list = applyService.getEngine().query()
-						.getActiveTasks(new QueryFilter().setOrderId(orderId));
-				if (list != null && list.size() > 0) {
-					Task task = list.get(0);
-					String taskId = task.getId();
-					setAttr("taskId", taskId);
-				}
-			}
+		List<Task> list = applyService
+				.getEngine()
+				.query()
+				.getActiveTasks(
+						new QueryFilter().setOrderId(orderId).setOperator(
+								getOperator()));
+		
+		
+
+		if (list != null && list.size() > 0) {
+			setAttr("isOpen", true);
+		} else {
+			setAttr("isOpen", false);
 		}
-		render("newApply.jsp");
+
+		keepPara();
+
+		List<FlowApproval> approvalList = FlowApproval.findByOrderId(orderId);
+
+		setAttr("approvalList", approvalList);
+
+		render("applyView.jsp");
 	}
 
 }

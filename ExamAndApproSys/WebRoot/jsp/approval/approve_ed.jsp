@@ -23,7 +23,6 @@
 			striped : true,
 			title : '个人申请',
 			width : 1010,
-			height:500,
 			fit:true,
 			url : "${ctx}/approvalController/getTeacherApprovedList?Date="
 					+ new Date() + "",
@@ -54,7 +53,7 @@
 				
 					{
 						field : 'internalStaffResult',
-						title : '国际处工作人员',
+						title : '预审',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,
@@ -62,7 +61,7 @@
 					},
 					{
 						field : 'internalChiefResult',
-						title : '国际处长',
+						title : '外事部门',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,
@@ -78,7 +77,7 @@
 					},
 					{
 						field : 'fundsSourceResult',
-						title : '经费来源部门',
+						title : '经费来源',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,

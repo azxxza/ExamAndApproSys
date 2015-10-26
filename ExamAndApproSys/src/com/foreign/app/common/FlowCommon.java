@@ -52,4 +52,10 @@ public class FlowCommon {
 	 */
 	public static final String PARTYSECRETARY = "partySecretary";
 
+	/**
+	 * 校长
+	 */
+
+	public static final String PRESIDENT = "president";
+
 }

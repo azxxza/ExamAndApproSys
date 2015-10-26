@@ -33,6 +33,10 @@ public class BaseController extends Controller {
 		return getLoginUser().getStr("user_name");
 	}
 
+	protected int getOperatorRole() {
+		return getLoginUser().getInt("role_no");
+	}
+
 	protected void renderMessage() {
 
 		MessageBean messageBean = new MessageBean();

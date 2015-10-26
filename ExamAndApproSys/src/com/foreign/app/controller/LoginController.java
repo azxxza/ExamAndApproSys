@@ -17,7 +17,7 @@ public class LoginController extends BaseController {
 		String password = getPara("password");
 		// 数据库查找
 		SysUser loginUser = SysUser.getUser(username, password);
-
+		
 		if (loginUser != null) {
 			setSessionAttr(SessionUser, loginUser);// 设置当前登录用户
 			messageBean.setFlag(true);
@@ -30,6 +30,7 @@ public class LoginController extends BaseController {
 	}
 
 	public void doLoginTest() {
+		
 		String username = getPara("username");
 
 		SysUser loginUser = SysUser.getUserByName(username);

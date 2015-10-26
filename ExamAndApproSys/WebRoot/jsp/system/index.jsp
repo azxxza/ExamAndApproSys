@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		for (var i = 1; i <= 4; i++) {
+		for (var i = 1; i <= 5; i++) {
 			$('#ttt_' + i).tree({
 				onClick : function(node) {
 					var title = node.text;
@@ -113,7 +113,7 @@
 <div region="west" data-options="iconCls:'icon-user',split:false" title="教师出境申报系统菜单" style="width:235px;" >
   <div class="easyui-accordion">
   
-  <privilege:show powerName="menu_apply">
+  <privilege:show powerName="apply_menu">
   
     <div title="我的申请" style="font-size: 100px;" data-options="iconCls:'icon-add',split:false">
       <ul id="ttt_1">
@@ -124,7 +124,7 @@
     </div>
    </privilege:show>
    
-   <privilege:show powerName="menu_approval">
+   <privilege:show powerName="approval_menu">
    		<div title="审批处理" style="overflow:auto;"  data-options="iconCls:'icon-ok',split:false">
 			<ul id="ttt_2">
 
@@ -143,9 +143,17 @@
 			</ul>
 		</div>
    </privilege:show>
+   <privilege:show powerName="admin_menu">
+   		<div title="系统管理" style="overflow:auto;"  data-options="iconCls:'icon-application-edit',split:false">
+			<ul id="ttt_4">
+				<li data-options="iconCls:'icon-user',url:'${ctx}/approvalController/approve_toBe'"><span>用户管理</span></li>
+				<li data-options="iconCls:'icon-edit',url:'${ctx}/approvalController/approve_ed'"><span>部门管理</span></li>
+			</ul>
+		</div>
+   </privilege:show>
    
     <div title="帮助及维护"  data-options="iconCls:'icon-help',split:false">
-      <ul id="ttt_4">
+      <ul id="ttt_5">
         <li data-options="iconCls:'icon-key'"><span>修改密码</span></li>
         <li data-options="iconCls:'icon-help',url:'${ctx}/maintenanceController/useHelp'"><span>使用帮助</span></li>
       </ul>

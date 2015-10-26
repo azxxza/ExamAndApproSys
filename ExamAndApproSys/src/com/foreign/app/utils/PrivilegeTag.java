@@ -5,14 +5,27 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import com.foreign.app.model.SysUser;
+import com.foreign.app.model.SysUserRole;
 
 public class PrivilegeTag extends TagSupport {
 
-	private static final String menu_apply = "menu_apply";
+	// 申请人
+	private static final String APPLY_VIEW = "apply_view";
 
-	private static final String menu_approval = "menu_approval";
+	private static final String APPLY_MENU = "apply_menu";
 
-	private static final String menu_chief = "menu_chief";
+	// 预审人员拥有的菜单
+	private static final String PRE_APPROVAL_VIEW = "pre_approval_view";
+
+	// 审批人员拥有的菜单
+	private static final String APPROVAL_VIEW = "approval_view";
+
+	private static final String APPROVAL_MENU = "approval_menu";
+
+	// 管理人员
+	private static final String ADMIN_VIEW = "admin_view";
+
+	private static final String ADMIN_MENU = "admin_menu";
 
 	/**
 	 * 添加用户，
@@ -38,20 +51,37 @@ public class PrivilegeTag extends TagSupport {
 		HttpSession session = pageContext.getSession();
 
 		SysUser user = (SysUser) session.getAttribute("loginUser");
+
 		if (user != null) {
-			int role_no = user.getInt("role_no");
+			int roleId = SysUserRole.getRoleIdByUserId(user.getInt("id"));
 
-			if (role_no == RoleCommon.TEACHER && powerName.equals(menu_apply)) {
+			if (roleId == RoleCommon.APPLY_USER && powerName.equals(APPLY_VIEW)) {
 				return EVAL_PAGE;
 			}
 
-			if (role_no != RoleCommon.TEACHER
-					&& powerName.equals(menu_approval)) {
+			if (roleId == RoleCommon.PRE_APPROVAL_USER
+					&& powerName.equals(PRE_APPROVAL_VIEW)) {
 				return EVAL_PAGE;
 			}
 
-			if (role_no == RoleCommon.INTERNALCHIEF
-					&& powerName.equals(menu_chief)) {
+			if (roleId == RoleCommon.APPROVAL_USER
+					&& powerName.equals(APPROVAL_VIEW)) {
+				return EVAL_PAGE;
+			}
+
+			if (roleId == RoleCommon.ADMIN && powerName.equals(ADMIN_VIEW)) {
+				return EVAL_PAGE;
+			}
+
+			if ((roleId == RoleCommon.PRE_APPROVAL_USER || roleId == RoleCommon.APPROVAL_USER)
+					&& powerName.equals(APPROVAL_MENU)) {
+				return EVAL_PAGE;
+			}
+			if ((roleId == RoleCommon.APPLY_USER)
+					&& powerName.equals(APPLY_MENU)) {
+				return EVAL_PAGE;
+			}
+			if ((roleId == RoleCommon.ADMIN) && powerName.equals(ADMIN_MENU)) {
 				return EVAL_PAGE;
 			}
 

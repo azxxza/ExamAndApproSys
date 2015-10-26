@@ -72,6 +72,7 @@ public class SnakerService {
 		List<Task> tasks = engine.query().getActiveTasks(
 				new QueryFilter().setOrderId(order.getId()));
 		if (tasks != null && tasks.size() > 0) {
+			
 			Task task = tasks.get(0);
 
 			execute(task.getId(), operator, params);
@@ -106,6 +107,10 @@ public class SnakerService {
 
 			approvalNode.setOrderId(orderId);
 
+			String workId = relationTeacherVisit.getStr("t_work_id");
+
+			approvalNode.setWorkId(workId);
+
 			String visitNo = relationTeacherVisit.getStr("visit_no");
 
 			approvalNode.setVisitNo(visitNo);
@@ -134,8 +139,8 @@ public class SnakerService {
 				FlowCommon.UNIT);
 
 		if (unit != null) {
-
-			remainApprove.setUnitResult(unit.getStr("result"));
+			unit.getBoolean("result");
+			remainApprove.setUnitResult("");
 		}
 
 		// 国际处工作人员
@@ -143,7 +148,7 @@ public class SnakerService {
 				FlowCommon.INTERNALSTAFF);
 
 		if (staff != null) {
-			remainApprove.setInternalStaffResult(staff.getStr("result"));
+			remainApprove.setInternalStaffResult(staff.getBoolean("result").toString());
 		}
 
 		// 国际处长
@@ -151,26 +156,26 @@ public class SnakerService {
 				FlowCommon.INTERNALCHIEF);
 
 		if (chief != null) {
-			remainApprove.setInternalChiefResult(chief.getStr("result"));
+			remainApprove.setInternalChiefResult(chief.getBoolean("result").toString());
 		}
 		// 财务处
 		FlowApproval finance = FlowApproval.findByOrderIdAndTaskKey(orderId,
 				FlowCommon.FINANCIAL);
 		if (finance != null) {
-			remainApprove.setFinanceResult(finance.getStr("result"));
+			remainApprove.setFinanceResult(finance.getBoolean("result").toString());
 		}
 		// 经费来源部门
 		FlowApproval fundsSource = FlowApproval.findByOrderIdAndTaskKey(
 				orderId, FlowCommon.FUNDSSOURCE);
 		if (fundsSource != null) {
-			remainApprove.setFundsSourceResult(fundsSource.getStr("result"));
+			remainApprove.setFundsSourceResult(fundsSource.getBoolean("result").toString());
 		}
 
 		// 纪监审部门
 		FlowApproval discipline = FlowApproval.findByOrderIdAndTaskKey(orderId,
 				FlowCommon.DISCIPLINE);
 		if (discipline != null) {
-			remainApprove.setDisciplineResult(discipline.getStr("result"));
+			remainApprove.setDisciplineResult(discipline.getBoolean("result").toString());
 		}
 
 		// 分管业务校领导
@@ -178,7 +183,7 @@ public class SnakerService {
 				orderId, FlowCommon.BUSINESSLEADER);
 		if (businessLeader != null) {
 			remainApprove.setBusinessLeaderResult(businessLeader
-					.getStr("result"));
+					.getBoolean("result").toString());
 		}
 
 		// 分管外事校领导
@@ -188,14 +193,14 @@ public class SnakerService {
 		if (internalLeader != null) {
 
 			remainApprove.setInternalLeaderResult(internalLeader
-					.getStr("result"));
+					.getBoolean("result").toString());
 		}
 		// 校党委书记
 		FlowApproval partySecretary = FlowApproval.findByOrderIdAndTaskKey(
 				orderId, FlowCommon.PARTYSECRETARY);
 		if (partySecretary != null) {
 			remainApprove.setPartySecretaryResult(partySecretary
-					.getStr("result"));
+					.getBoolean("result").toString());
 		}
 
 		return remainApprove;

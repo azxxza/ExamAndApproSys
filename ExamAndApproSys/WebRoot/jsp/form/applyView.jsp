@@ -6,7 +6,7 @@
 <title>系统登录</title>
 <%@ include file="/jsp/common/meta.jsp"%>
 <%@ include file="/jsp/common/taglibs.jsp"%>
-<link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/themes/metro-blue/easyui.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/demo/demo.css">
 <%@ include file="/jsp/common/easyui.jsp"%>
 <style type="text/css">

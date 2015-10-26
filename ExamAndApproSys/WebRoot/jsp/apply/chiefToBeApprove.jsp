@@ -66,7 +66,7 @@
 				
 					{
 						field : 'internalStaffResult',
-						title : '国际处工作人员',
+						title : '预审',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,
@@ -74,7 +74,7 @@
 					},
 					{
 						field : 'internalChiefResult',
-						title : '国际处长',
+						title : '外事部门',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,
@@ -256,9 +256,11 @@
 		
 		var orderId = row.orderId;
 		
+		var visitSummary = row.visitSummary;
+		
 		var detailURL = "${ctx}/applyController/editApply?orderId=" + orderId;
 		
-		parent.addTabs("详情",detailURL);
+		parent.addTabs(visitSummary + "详情",detailURL);
 
 	}
 	

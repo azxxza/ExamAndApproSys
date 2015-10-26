@@ -73,26 +73,19 @@
 	<form action="${ctx}/loginController/doLoginTest">
 
 		<select style="width: 100px;" name="username">
-			<option value="申请人1" style="width: 100px;">申请人1</option>
-			<option value="申请人2" style="width: 100px;">申请人2</option>
-			<option value="所在单位1" style="width: 100px;">所在单位1</option>
-			<option value="所在单位2" style="width: 100px;">所在单位2</option>
-			<option value="国际处工作人员1" style="width: 100px;">国际处工作人员1</option>
-			<option value="国际处工作人员2" style="width: 100px;">国际处工作人员2</option>
-			<option value="国际处长1" style="width: 100px;">国际处长1</option>
-			<option value="国际处长2" style="width: 100px;">国际处长2</option>
-			<option value="财务处1" style="width: 100px;">财务处1</option>
-			<option value="财务处2" style="width: 100px;">财务处2</option>
-			<option value="经费来源部门1" style="width: 100px;">经费来源部门1</option>
-			<option value="经费来源部门2" style="width: 100px;">经费来源部门2</option>
-			<option value="纪监审部门1" style="width: 100px;">纪监审部门1</option>
-			<option value="纪监审部门2" style="width: 100px;">纪监审部门2</option>
-			<option value="业务分管校领导1" style="width: 100px;">业务分管校领导1</option>
-			<option value="业务分管校领导2" style="width: 100px;">业务分管校领导2</option>
-			<option value="外事分管校领导1" style="width: 100px;">外事分管校领导1</option>
-			<option value="外事分管校领导2" style="width: 100px;">外事分管校领导2</option>
-			<option value="校党委书记1" style="width: 100px;">校党委书记1</option>
-			<option value="校党委书记2" style="width: 100px;">校党委书记2</option>
+			<option value="apply1" style="width: 100px;">申请人1</option>
+			<option value="apply2" style="width: 100px;">申请人2</option>
+			<option value="pre_approval" style="width: 100px;">预审人员</option>
+			<option value="unit" style="width: 100px;">所在单位1</option>
+			<option value="internal" style="width: 100px;">国际处</option>
+			<option value="finance" style="width: 100px;">财务处</option>
+			<option value="foudSource" style="width: 100px;">foudSource</option>
+			<option value="discipline" style="width: 100px;">纪监审部门</option>
+			<option value="business_leader" style="width: 100px;">业务分管校领导2</option>
+			<option value="internal_leader" style="width: 100px;">外事分管校领导2</option>
+			<option value="party_secretary " style="width: 100px;">校党委书记2</option>
+			<option value="president" style="width: 100px;">校长</option>
+			<option value="admin" style="width: 100px;">系统管理员</option>
 			
 			
 			

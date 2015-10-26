@@ -5,7 +5,7 @@
 <title>系统登录</title>
 <%@ include file="/jsp/common/meta.jsp"%>
 <%@ include file="/jsp/common/taglibs.jsp"%>
-<link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/themes/metro-blue/easyui.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/demo/demo.css">
 <%@ include file="/jsp/common/easyui.jsp"%>
 <style type="text/css">
@@ -174,7 +174,7 @@
 			<tr>
 				<td>姓名:</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_name" value="${formTeacherBasic.t_b_name}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-options=" required:true"></td>
 				<td></td>
 				<td>性别:</td>
 
@@ -183,12 +183,12 @@
 
 				<td>出生地：</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_birth_palce" value="${formTeacherBasic.t_b_birth_palce}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-alidType:'length[3,10]'"></td>
 				<td></td>
 				<td>户口所在地：</td>
 
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_household_place" value="${formTeacherBasic.t_b_household_place}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-options=" required:true"></td>
 			</tr>
 			<tr>
 				<td>政治面貌:</td>
@@ -198,7 +198,7 @@
 				<td></td>
 				<td>文化程度:</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_education_degree" value="${formTeacherBasic.t_b_education_degree}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-options=" required:true"></td>
 
 				<td>民族:</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_nation" value="${formTeacherBasic.t_b_nation}"
@@ -207,7 +207,7 @@
 				<td></td>
 				<td>所在单位:</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_unit" value="${formTeacherBasic.t_b_unit}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-options=" required:true"></td>
 			</tr>
 
 			<tr>
@@ -221,7 +221,7 @@
 
 				<td>联系电话:</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_tel" value="${formTeacherBasic.t_b_tel}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-options=" required:true"></td>
 				<td></td>
 				<td>电子邮箱:</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_email" value="${formTeacherBasic.t_b_email}"
@@ -230,7 +230,7 @@
 			<tr>
 				<td>职务 :</td>
 				<td><input class="easyui-validatebox textbox" name="formTeacherBasic.t_b_job" value="${formTeacherBasic.t_b_job}"
-					data-options=" required:true,validType:'length[3,10]'"></td>
+					data-options=" required:true"></td>
 				<td></td>
 				<td>级别:</td>
 				<td><input class="easyui-combobox" name="formTeacherBasic.t_b_level" value="${formTeacherBasic.t_b_level}" id="t_b_level"
@@ -370,27 +370,27 @@
 
 					<td>单位:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 					<td>单位英文名:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 				</tr>
 				<tr>
 					<td>地址:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>电话:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>传真:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>Email:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 				</tr>
 			</table>
 
@@ -416,33 +416,33 @@
 
 					<td>国际旅费:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>住宿费:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 				</tr>
 				<tr>
 					<td>伙食费:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>公杂费:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>境外城市间交通费:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 
 					<td>其它费用:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 				</tr>
 				<tr>
 					<td>合计:</td>
 					<td><input class="easyui-validatebox textbox"
-						data-options=" required:true,validType:'length[3,10]'"></td>
+						data-options=" required:true"></td>
 				</tr>
 			</table>
 		</div>

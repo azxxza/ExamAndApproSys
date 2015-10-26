@@ -6,7 +6,7 @@
 <title>系统登录</title>
 <%@ include file="/jsp/common/meta.jsp"%>
 <%@ include file="/jsp/common/taglibs.jsp"%>
-<link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/themes/metro-blue/easyui.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/easyui_1.4.3/demo/demo.css">
 <%@ include file="/jsp/common/easyui.jsp"%>
 <style type="text/css">
@@ -21,12 +21,18 @@
 <script type="text/javascript">
 
 	$(function() {
-	
+		var isOpen = '${isOpen}'
+		
+			if(isOpen == true){
+			
+		} else {
+			$('input').attr("readonly","readonly")//将input元素设置为readonly
+		}
 	})
 	
 	function enterApproval(){
 		
-		$('#win').window('open').window('resize',{top: 200,left:300});
+		$('#win').window('open').window('resize',{top: 100,left:170});
 		
 	}
 	
@@ -40,6 +46,32 @@
 			document.getElementById("result").value = 0;
 		}
 		
+		if(result == 2){
+			document.getElementById("result").value = 2;
+		}
+		
+		if(result == 1){
+			
+			var isOpen = ${isOpen};
+			if(isOpen == true){
+				$.messager.confirm('确认对话框', '同意将同时修改表单内容？', function(yes) {
+					if (yes) {
+						subData();
+						
+					}
+				});
+		
+			}else {
+				subData();
+			}
+		}
+		
+		
+		
+	
+	}
+	
+	function subData(){
 		var formData = jQuery("#approval").serializeArray();
 		
 		var saveURL = "${ctx}/approvalController/processApply?date=" + new Date() + "";
@@ -65,7 +97,7 @@
 	}
 	
 	function sumbmitApproval(){
-		alert("提交修改");
+		
 	}
 	
 </script>
@@ -473,7 +505,7 @@
 </div>
 
 <div id="win" class="easyui-dialog" title="审批"
-		style="width:400px;height:250px;"
+		style="width:500px;height:350px;"
 		data-options="modal:true,closed:true">
 
 		<form id="approval" name="approval" method="post">
@@ -482,7 +514,7 @@
 			<table style="margin-left: 30px; font-size: 9px; margin-top: 20px;" >
 				<tr>
 					<td>审批意见:</td>
-					<td style="padding-left: 15px;"><textarea name="approval.description" class="easyui-textbox" data-options="multiline:true" id="advice" style="width: 220px; height: 100px;" ></textarea></td>
+					<td style="padding-left: 15px;"><textarea name="approval.description" class="easyui-textbox" data-options="multiline:true" id="advice" style="width: 300px; height: 200px;" ></textarea></td>
 					
 				</tr>
 			</table>
@@ -499,7 +531,7 @@
 							<privilege:show powerName="menu_chief">
 								<a href="#" class="easyui-linkbutton"
 									data-options="iconCls:'icon-undo'" style="width:80px"
-									onclick="doApproval(0)">驳回修改</a>
+									onclick="doApproval(2)">驳回修改</a>
 							</privilege:show>
 			</div>
 			
@@ -536,7 +568,7 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						data-options="iconCls:'icon-ok',plain:true" style="width:80px; color: red;">通过</a></td>
 					</c:if>
-					<c:if test="${approval.result==0 }">
+					<c:if test="${approval.result==0 || approval.result == 2}">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						data-options="iconCls:'icon-cancel',plain:true" style="width:80px; color: red;">不通过</a></td>
 					</c:if>

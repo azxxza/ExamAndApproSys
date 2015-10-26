@@ -44,16 +44,16 @@ public class ApprovalController extends BaseController {
 	// 待批申请 json 数据
 	public void getApprove_toBeJsonList() {
 
-		String operator = getOperator();
-
-		List<ApprovalState> remainApproveList = approvalService
-				.getApprovalToBeList(operator);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("rows", remainApproveList);
-
-		renderJson(map);
+//		String operator = getOperator();
+//
+//		List<ApprovalState> remainApproveList = approvalService
+//				.getApprovalToBeList(operator);
+//
+//		Map<String, Object> map = new HashMap<String, Object>();
+//
+//		map.put("rows", remainApproveList);
+//
+//		renderJson(map);
 	}
 
 	// 已批申请 json 数据
@@ -81,6 +81,8 @@ public class ApprovalController extends BaseController {
 		String orderId = getPara("orderId");
 
 		String t_work_id = getPara("t_work_id");
+		
+		System.out.println(t_work_id);
 
 		if (t_work_id != null) {
 			FormTeacherBasic formTeacherBasic = FormTeacherBasic
@@ -88,6 +90,58 @@ public class ApprovalController extends BaseController {
 
 			setAttr("formTeacherBasic", formTeacherBasic);
 		}
+		
+		int role = getOperatorRole();
+
+//		switch (role) {
+//		case RoleCommon.UNIT: {
+//			setAttr("isOpen", false);
+//			break;
+//		}
+//
+//		case RoleCommon.INTERNALSTAFF: {
+//			setAttr("isOpen", true);
+//			break;
+//		}
+//
+//		case RoleCommon.INTERNALCHIEF: {
+//			setAttr("isOpen", true);
+//			break;
+//		}
+//
+//		case RoleCommon.FINANCIAL: {
+//			setAttr("isOpen", true);
+//			break;
+//		}
+//
+//		case RoleCommon.FUNDSSOURCE: {
+//			setAttr("isOpen", true);
+//			break;
+//		}
+//
+//		case RoleCommon.DISCIPLINE: {
+//			setAttr("isOpen", false);
+//			break;
+//		}
+//
+//		case RoleCommon.BUSINESSLEADER: {
+//			setAttr("isOpen", false);
+//			break;
+//		}
+//
+//		case RoleCommon.INTERNALLEADER: {
+//			setAttr("isOpen", false);
+//			break;
+//		}
+//
+//		case RoleCommon.PARTYSECRETARY: {
+//			setAttr("isOpen", true);
+//			break;
+//		}
+//
+//		default:
+//			break;
+//		}
 
 		List<FlowApproval> approvalList = FlowApproval.findByOrderId(orderId);
 
@@ -102,52 +156,52 @@ public class ApprovalController extends BaseController {
 
 		switch (roleId) {
 
-		case RoleCommon.UNIT: {
-
-			unitApprove(operator);
-			break;
-		}
-
-		case RoleCommon.INTERNALSTAFF: {
-
-			internalStaffApprove(operator);
-			break;
-		}
-
-		case RoleCommon.INTERNALCHIEF: {
-			internalChiefApprove(operator);
-			break;
-		}
-
-		case RoleCommon.FINANCIAL: {
-			financeApprove(operator);
-			break;
-		}
-
-		case RoleCommon.FUNDSSOURCE: {
-			fundsSourceApprove(operator);
-			break;
-		}
-
-		case RoleCommon.DISCIPLINE: {
-			disciplineApprove(operator);
-			break;
-		}
-
-		case RoleCommon.BUSINESSLEADER: {
-			businessLeaderApprove(operator);
-			break;
-		}
-
-		case RoleCommon.INTERNALLEADER: {
-			internalLeaderApprove(operator);
-			break;
-		}
-
-		case RoleCommon.PARTYSECRETARY: {
-			partySecretaryApprove(operator);
-			break;
-		}
+//		case RoleCommon.UNIT: {
+//
+//			unitApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.INTERNALSTAFF: {
+//
+//			internalStaffApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.INTERNALCHIEF: {
+//			internalChiefApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.FINANCIAL: {
+//			financeApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.FUNDSSOURCE: {
+//			fundsSourceApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.DISCIPLINE: {
+//			disciplineApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.BUSINESSLEADER: {
+//			businessLeaderApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.INTERNALLEADER: {
+//			internalLeaderApprove(operator);
+//			break;
+//		}
+//
+//		case RoleCommon.PARTYSECRETARY: {
+//			partySecretaryApprove(operator);
+//			break;
+//		}
 
 		default: {
 			break;
@@ -157,127 +211,127 @@ public class ApprovalController extends BaseController {
 		renderMessage();
 	}
 
-	// 单位审批
-	public void unitApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.getStr("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.UNIT, operator);
-
-		approvalService.unitApprove(approval, operator, orderId);
-
-	}
-
-	// 国际处工作人员审批
-	public void internalStaffApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.getStr("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.INTERNALSTAFF,
-				operator);
-
-		approvalService.internalStaffApprove(approval, operator, orderId);
-
-	}
-
-	// 国际处长审批
-	public void internalChiefApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.get("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.INTERNALCHIEF,
-				operator);
-
-		approvalService.internalChiefApprove(approval, operator, orderId);
-
-	}
-
-	// 财务处审批
-	public void financeApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.getStr("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.FINANCIAL, operator);
-
-		approvalService.financeApprove(approval, operator, orderId);
-
-	}
-
-	// 经费来源部门审批
-	public void fundsSourceApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.getStr("orderId");
-
-		approvalService
-				.saveApproval(approval, FlowCommon.FUNDSSOURCE, operator);
-
-		approvalService.fundsSourceApprove(approval, operator, orderId);
-
-	}
-
-	// 纪监审部门处理流程
-	public void disciplineApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.get("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.DISCIPLINE, operator);
-
-		approvalService.disciplineApprove(approval, operator, orderId);
-
-	}
-
-	// 业务分管校领导审批
-	public void businessLeaderApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.get("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.BUSINESSLEADER,
-				operator);
-
-		approvalService.businessLeaderApprove(approval, operator, orderId);
-
-	}
-
-	// 分管外事校领导审批
-	public void internalLeaderApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.get("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.INTERNALLEADER,
-				operator);
-
-		approvalService.internalLeaderApprove(approval, operator, orderId);
-
-	}
-
-	// 校党委书记审批
-	public void partySecretaryApprove(String operator) {
-
-		FlowApproval approval = getModel(FlowApproval.class, "approval");
-
-		String orderId = approval.getStr("orderId");
-
-		approvalService.saveApproval(approval, FlowCommon.PARTYSECRETARY,
-				operator);
-
-		approvalService.partySecretaryApprove(approval, operator, orderId);
-
-	}
+//	// 单位审批
+//	public void unitApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.getStr("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.UNIT, operator);
+//
+//		approvalService.unitApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 国际处工作人员审批
+//	public void internalStaffApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.getStr("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.INTERNALSTAFF,
+//				operator);
+//
+//		approvalService.internalStaffApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 国际处长审批
+//	public void internalChiefApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.get("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.INTERNALCHIEF,
+//				operator);
+//
+//		approvalService.internalChiefApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 财务处审批
+//	public void financeApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.getStr("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.FINANCIAL, operator);
+//
+//		approvalService.financeApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 经费来源部门审批
+//	public void fundsSourceApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.getStr("orderId");
+//
+//		approvalService
+//				.saveApproval(approval, FlowCommon.FUNDSSOURCE, operator);
+//
+//		approvalService.fundsSourceApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 纪监审部门处理流程
+//	public void disciplineApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.get("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.DISCIPLINE, operator);
+//
+//		approvalService.disciplineApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 业务分管校领导审批
+//	public void businessLeaderApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.get("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.BUSINESSLEADER,
+//				operator);
+//
+//		approvalService.businessLeaderApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 分管外事校领导审批
+//	public void internalLeaderApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.get("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.INTERNALLEADER,
+//				operator);
+//
+//		approvalService.internalLeaderApprove(approval, operator, orderId);
+//
+//	}
+//
+//	// 校党委书记审批
+//	public void partySecretaryApprove(String operator) {
+//
+//		FlowApproval approval = getModel(FlowApproval.class, "approval");
+//
+//		String orderId = approval.getStr("orderId");
+//
+//		approvalService.saveApproval(approval, FlowCommon.PARTYSECRETARY,
+//				operator);
+//
+//		approvalService.partySecretaryApprove(approval, operator, orderId);
+//
+//	}
 
 }

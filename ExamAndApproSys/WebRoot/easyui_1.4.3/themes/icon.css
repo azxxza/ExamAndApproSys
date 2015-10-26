@@ -30,6 +30,10 @@
 	background: url('icons/enter.png') no-repeat center center;
 }
 
+.icon-application-edit {
+	background: url('icons/application-edit.png') no-repeat center center;
+}
+
 .icon-upload {
 	background: url('icons/edit_upload.png') no-repeat center center;
 }

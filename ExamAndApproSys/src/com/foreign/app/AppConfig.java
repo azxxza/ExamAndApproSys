@@ -27,6 +27,8 @@ import com.foreign.app.model.SysLevel;
 import com.foreign.app.model.SysRole;
 import com.foreign.app.model.SysUnit;
 import com.foreign.app.model.SysUser;
+import com.foreign.app.model.SysUserRole;
+import com.foreign.app.model.SysUserUnit;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -57,7 +59,7 @@ public class AppConfig extends JFinalConfig {
 		me.setViewType(ViewType.JSP);
 
 		me.setBaseViewPath("/jsp");
-		
+
 	}
 
 	/**
@@ -77,11 +79,12 @@ public class AppConfig extends JFinalConfig {
 		me.add("/searchController", SearchController.class, "statistics");
 
 		me.add("/reportController", ReportController.class, "statistics");
-		
-		me.add("/maintenanceController", MaintenanceController.class, "maintenance");
+
+		me.add("/maintenanceController", MaintenanceController.class,
+				"maintenance");
 
 		me.add("/levelController", LevelController.class);
-		
+
 	}
 
 	/**
@@ -97,13 +100,7 @@ public class AppConfig extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		me.add(arp);
 
-		arp.addMapping("sys_user", SysUser.class);
-
-		arp.addMapping("sys_unit", SysUnit.class);
-
-		arp.addMapping("sys_level", SysLevel.class);
-		
-		arp.addMapping("sys_role", SysRole.class);
+		arp.addMapping("flow_approval", FlowApproval.class);
 
 		arp.addMapping("form_teacher_basic", FormTeacherBasic.class);
 
@@ -111,20 +108,31 @@ public class AppConfig extends JFinalConfig {
 
 		arp.addMapping("form_visit_task", FormVisitTask.class);
 
-		arp.addMapping("form_visit_task_route",
-				FormVisitTaskRoute.class);
+		arp.addMapping("form_visit_task_route", FormVisitTaskRoute.class);
 
 		arp.addMapping("form_visit_inviter", FormVisitInviter.class);
 
-		arp.addMapping("form_visit_financial_budget", FormVisitFinancialBudget.class);
+		arp.addMapping("form_visit_financial_budget",
+				FormVisitFinancialBudget.class);
 
 		arp.addMapping("form_visit_attachment", FormVisitAttachment.class);
 
-		arp.addMapping("form_visit_extra_instruction", FormVisitExtraInstruction.class);
-		
+		arp.addMapping("form_visit_extra_instruction",
+				FormVisitExtraInstruction.class);
+
 		arp.addMapping("relation_teacher_visit", RelationTeacherVisit.class);
-		
-		arp.addMapping("flow_approval", FlowApproval.class);
+
+		arp.addMapping("sys_level", SysLevel.class);
+
+		arp.addMapping("sys_role", SysRole.class);
+
+		arp.addMapping("sys_unit", SysUnit.class);
+
+		arp.addMapping("sys_user", SysUser.class);
+
+		arp.addMapping("sys_user_role", "user_id, role_id", SysUserRole.class);
+
+		arp.addMapping("sys_user_unit", "user_id, unit_id", SysUserUnit.class);
 
 		// 配置Snaker插件
 		SnakerPlugin snakerPlugin = new SnakerPlugin(c3p0Plugin,

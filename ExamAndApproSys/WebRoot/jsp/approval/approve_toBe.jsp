@@ -14,14 +14,14 @@
 	function initBasicGrid() {
 		jQuery('#basicGrid_div').datagrid({
 			view : myview,
-
+			fit:true,
 			singleSelect : false,
 			loadMsg : '正在加载数据',
 			emptyMsg : '没有相关记录',
 			striped : true,
 			title : '个人申请',
 			width : 1000,
-			height : 250,
+			rownumbers:true,
 			url : "${ctx}/approvalController/getApprove_toBeJsonList?Date="
 					+ new Date() + "",
 			columns : [ [
@@ -31,9 +31,8 @@
 					},
 					{
 						field : 'workId',
-						hidden:true,
+						hidden:false,
 					},
-					
 				
 					{
 						field : 'visitNo',
@@ -61,7 +60,7 @@
 				
 					{
 						field : 'internalStaffResult',
-						title : '国际处工作人员',
+						title : '预审',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,
@@ -69,7 +68,7 @@
 					},
 					{
 						field : 'internalChiefResult',
-						title : '国际处长',
+						title : '外事部门',
 						align : 'center',
 						formatter : formatResult,
 						styler : cellStyler,
@@ -166,6 +165,7 @@
 		var row = $('#basicGrid_div').datagrid('getSelected');
 		var orderId = row.orderId;
 		var t_work_id = row.workId;
+		alert(t_work_id);
 		var detailURL = "${ctx}/approvalController/processDetail?orderId=" + orderId+"&t_work_id="+t_work_id;
 		parent.addTabs("详情",detailURL);
 
@@ -177,13 +177,13 @@
 			return '';
 		}
 	
-		if (value.result == 1) {
+		if (value == 1) {
 
 			return 'background-color:green;color:white;';
 
 		} 
 		
-		if (value.result == 0){
+		if (value == 0 || value == 2){
 			return 'background-color:red;color:white;';
 		}
 		else {
@@ -195,16 +195,16 @@
 
 	function formatResult(value, row, index){
 	
-		if(value == undefined || value.result == 2){
+		if(value == undefined){
 			return "未审核";
 		} 
 		
-		if(value.result == 1){
+		if(value == 1){
 			
 			return "通过";
 		}
 		
-		if(value.result == 0){
+		if(value == 0  || value == 2){
 			return "不通过";
 		}else {
 			return "";

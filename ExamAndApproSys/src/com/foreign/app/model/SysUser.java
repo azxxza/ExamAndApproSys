@@ -14,8 +14,10 @@ public class SysUser extends Model<SysUser> {
 		String sql = "Select * From " + SYS_USER + " Where user_name = '"
 				+ username + "' and user_password = '" + password + "'";
 
+		System.out.println(sql);
+
 		// 数据库查找
-		return SysUser.dao.findFirst(sql);
+		return dao.findFirst(sql);
 	}
 
 	public static SysUser getUserByName(String username) {
@@ -23,18 +25,20 @@ public class SysUser extends Model<SysUser> {
 		String sql = "Select * From " + SYS_USER + " Where user_name = '"
 				+ username + "'";
 
-		return SysUser.dao.findFirst(sql);
+		System.out.println(sql);
+
+		return dao.findFirst(sql);
 
 	}
 
-	public static SysUser getUserByRoleNo(int role_no) {
-		// 设置查找语句
-		String sql = "Select * From " + SYS_USER + " Where role_no = "
-				+ role_no;
-
-		return SysUser.dao.findFirst(sql);
-
-	}
+//	public static SysUser getUserByRoleId(int role_no) {
+//		// 设置查找语句
+//		String sql = "Select * From " + SYS_USER + " Where role_no = "
+//				+ role_no;
+//
+//		return dao.findFirst(sql);
+//
+//	}
 
 	public static String getWorkIdByUserName(String userName) {
 		String sql = "select * from " + SYS_USER + " where user_name = '"
@@ -75,6 +79,8 @@ public class SysUser extends Model<SysUser> {
 		return t_b_level;
 	}
 	
+	
+
 	
 
 }

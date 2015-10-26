@@ -4,16 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.snaker.engine.access.QueryFilter;
 import org.snaker.engine.entity.Order;
-import org.snaker.engine.entity.Task;
 
 import com.foreign.app.bean.ApprovalState;
 import com.foreign.app.model.FlowApproval;
 import com.foreign.app.model.FormTeacherBasic;
 import com.foreign.app.model.RelationTeacherVisit;
-import com.foreign.app.model.SysUnit;
 import com.foreign.app.model.SysUser;
+import com.foreign.app.model.SysUserRole;
 import com.framework.flow.Service.SnakerService;
 
 public class ApplyService extends SnakerService {
@@ -29,32 +27,11 @@ public class ApplyService extends SnakerService {
 
 		orderParams.put("l_no", level);
 
-		orderParams.put("unitPass", 0);
+		SysUser sysUser = SysUserRole
 
-		orderParams.put("chiefPass", 0);
+		orderParams.put("unit.operator", sysUser.getStr("user_name"));
 
-		Order order = startInstanceByName(operator, orderParams);
-
-		List<Task> tasks = engine.query().getActiveTasks(
-				new QueryFilter().setOrderId(order.getId()));
-
-		if (tasks != null && tasks.size() > 0) {
-
-			Map<String, Object> taskParams = new HashMap<String, Object>();
-
-			Task task = tasks.get(0);
-
-			SysUnit sysUnit = loginUser.getSysUnit();
-
-			int unit_manager_id = sysUnit.get("unit_manager_id");
-
-			SysUser unitUser = SysUser.dao.findById(unit_manager_id);
-
-			taskParams
-					.put("approveUnit.operator", unitUser.getStr("user_name"));
-
-			engine.executeTask(task.getId(), operator, taskParams);
-		}
+		Order order = startAndExecute(operator, orderParams);
 
 		return order.getId();
 
@@ -70,13 +47,13 @@ public class ApplyService extends SnakerService {
 		// 流程变量参数
 		Map<String, Object> params = new HashMap<String, Object>();
 
-		SysUser user = SysUser.getUserByRoleNo(3);
+		SysUser user = SysUser.getUserByRoleId(3);
 
 		// 执行人
 		params.put("newApply.operator", operator);
 
 		// 下一个执行人
-		params.put("approveInternalUnitStaff.operator", user.get("user_name"));
+		params.put("internalStaff.operator", user.get("user_name"));
 
 		params.put("l_no", level);
 
@@ -135,11 +112,11 @@ public class ApplyService extends SnakerService {
 
 		List<FlowApproval> list = FlowApproval.findByOrderId(orderId);
 
-		FlowApproval approvalUnit = FlowApproval.findByOrderIdAndTaskKey(orderId,
-				"approveUnit");
+		FlowApproval approvalUnit = FlowApproval.findByOrderIdAndTaskKey(
+				orderId, "approveUnit");
 
-		FlowApproval approveInternalUnitChief = FlowApproval.findByOrderIdAndTaskKey(
-				orderId, "approveInternalUnitChief");
+		FlowApproval approveInternalUnitChief = FlowApproval
+				.findByOrderIdAndTaskKey(orderId, "approveInternalUnitChief");
 
 		if (list != null && list.size() > 0) {
 			for (int i = 0; i < list.size(); i++) {
